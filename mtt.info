@@ -1,0 +1,6 @@
+name = Menu by taxonomy
+description = Display menu by taxonomy term
+core = 7.x
+dependencies[] = menu_fields
+
+scripts[] = /js/mtt.js
