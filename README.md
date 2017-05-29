@@ -12,6 +12,7 @@ information.
 - Active menu_field
 - Configure menu_field
 - Add Term reference field
+- Set node path width 'tag' alias at the beginning
 
 
 This version is programmed for the 'tag' vocabulary with unlimited values.

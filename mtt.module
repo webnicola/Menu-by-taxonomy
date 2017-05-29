@@ -8,20 +8,15 @@ function mtt_entity_view($entity, $type) {
     return;
   }
 
-  // Memorizzo il path e mi prendo il codice corso
   $path = explode("/", request_path());
-  // Memorizzo le propieta' delle voci di menu
   $link = menu_link_load($entity->mlid);
 
-  // trick nascondo tutti
   $entity->content['#prefix'] = '<li class="element-invisible" aria-hidden="true">';
 
-  // Cerco i corsi settati per ogni voce di menu
   foreach ($entity->tags['und'] as $item) {
     $term  = taxonomy_term_load($item['tid']);
     $corso = $term->name;
     
-    // Mostro solo quelli che hanno il corso settato
     if ($corso === $path[0]) { 
       $entity->content['#prefix'] = '<li' . drupal_attributes($entity->content['menu_fields_link'][$link['mlid']]['#attributes']) . '>';
     }
@@ -37,16 +32,8 @@ function mtt_form_alter(&$form, &$form_state, $form_id) {
     return;
   }
 
-  // dpm($form['menu_fields']['fields']['tags']['und']['#multiple']);
-
-  // Mostro sempre l'opzione campi nei menu
   $form['menu_fields']['#collapsible']              = FALSE;
   $form['menu_fields']['enabled']['#default_value'] = TRUE;
-
-  // Se il campo e' multiplo aggiungo tasti per selezionare tutti o deselezionare tutti i termini
-  if ($form['menu_fields']['fields']['tags']['und']['#multiple']) {
-    $form['menu_fields']['fields']['tags']['und']['#description'] = '<a href="#" class="selec-all">' . t('Select all') . '</a> - <a href="#" class="unselec-all">' . t('Unselect all') . '</a>';
-  }
 }
 
 
